@@ -54,6 +54,13 @@ concatenated_df = pd.concat(dfs)
 # Downsample the data to every 15 minutes
 concatenated_df = concatenated_df.resample('15T').mean().dropna()
 
+
+# Save the concatenated data to a CSV file
+concatenated_df.to_csv('concatenated_heart_rate_data.csv', index=True)
+
+print("Concatenated data has been saved to 'concatenated_heart_rate_data.csv'.")
+
+
 # Prepare the data for Prophet
 df_prophet = concatenated_df.reset_index().rename(columns={'datetime': 'ds', 'value': 'y'})
 
